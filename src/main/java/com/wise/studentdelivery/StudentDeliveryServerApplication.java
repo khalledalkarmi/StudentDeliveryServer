@@ -8,6 +8,10 @@ public class StudentDeliveryServerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(StudentDeliveryServerApplication.class, args);
+
 	}
 
+	public void print(){
+		
+	}
 }
