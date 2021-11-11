@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 /*
@@ -24,6 +25,22 @@ public class User {
     private int graduateYear;
     private Address address;
     private Car haveCar;
-    private ZonedDateTime createdTime;
+    private LocalDateTime createdTime;
 
+    public User(String firstName, String lastName,
+                Gender gender, String emile,
+                String uniName, Long studentNumber,
+                int graduateYear, Address address,
+                Car haveCar, LocalDateTime createdTime) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.emile = emile;
+        this.uniName = uniName;
+        this.studentNumber = studentNumber;
+        this.graduateYear = graduateYear;
+        this.address = address;
+        this.haveCar = haveCar;
+        this.createdTime = createdTime;
+    }
 }
