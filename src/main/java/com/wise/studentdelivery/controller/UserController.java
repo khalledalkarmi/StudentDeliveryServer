@@ -8,6 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/*
+    TODO: add fetchByStudentNumber
+    TODO: add fetchByPhoneNumber
+    TODO: add fetchByEmail
+    TODO: add fetchByCarNumber
+
+ */
 @RestController
 @RequestMapping("/api/v1/users")
 @AllArgsConstructor
