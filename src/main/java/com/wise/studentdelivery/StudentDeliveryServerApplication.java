@@ -11,7 +11,4 @@ public class StudentDeliveryServerApplication {
 
 	}
 
-	public void print(){
-		
-	}
 }
