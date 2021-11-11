@@ -2,6 +2,7 @@ package com.wise.studentdelivery.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -19,8 +20,15 @@ public class User {
     private String firstName;
     private String lastName;
     private Gender gender;
+
+    @Indexed(unique = true)
     private String emile;
     private String uniName;
+
+    @Indexed(unique = true)
+    private int phoneNumber;
+
+    @Indexed(unique = true)
     private Long studentNumber;
     private int graduateYear;
     private Address address;
@@ -29,14 +37,19 @@ public class User {
 
     public User(String firstName, String lastName,
                 Gender gender, String emile,
-                String uniName, Long studentNumber,
-                int graduateYear, Address address,
-                Car haveCar, LocalDateTime createdTime) {
+                String uniName,
+                int phoneNumber,
+                Long studentNumber,
+                int graduateYear,
+                Address address,
+                Car haveCar,
+                LocalDateTime createdTime) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.emile = emile;
         this.uniName = uniName;
+        this.phoneNumber = phoneNumber;
         this.studentNumber = studentNumber;
         this.graduateYear = graduateYear;
         this.address = address;
