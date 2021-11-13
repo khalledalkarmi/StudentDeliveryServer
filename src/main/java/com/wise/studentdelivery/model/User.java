@@ -6,15 +6,16 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 
 /*
 TODO: add profile image
 TODO: add id card image
+TODO: add student id number image
  */
 @Data
 @Document
 public class User {
+    // we use @Indexed(unique = true) for unique number to avoid duplicated in database
     @Id
     private String ID;
     private String firstName;
