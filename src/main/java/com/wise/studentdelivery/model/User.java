@@ -25,7 +25,7 @@ public class User {
     private Gender gender;
 
     @Indexed(unique = true)
-    private String emile;
+    private String email;
     private String uniName;
 
     @Indexed(unique = true)
@@ -39,7 +39,7 @@ public class User {
     private LocalDateTime createdTime;
 
     public User(String firstName, String lastName,
-                Gender gender, String emile,
+                Gender gender, String email,
                 String uniName,
                 int phoneNumber,
                 String studentNumber,
@@ -50,7 +50,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
-        this.emile = emile;
+        this.email = email;
         this.uniName = uniName;
         this.phoneNumber = phoneNumber;
         this.studentNumber = studentNumber;

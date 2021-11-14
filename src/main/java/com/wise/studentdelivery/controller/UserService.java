@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public Optional<User> getUserByEmail(String email){
-        return userRepository.findUserByEmile(email);
+        return userRepository.findUserByEmail(email);
     }
 
     public Optional<List<User>> getUsersByUni(String uni){
