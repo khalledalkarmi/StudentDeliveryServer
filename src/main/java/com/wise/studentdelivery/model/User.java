@@ -30,7 +30,7 @@ public class User {
     private int phoneNumber;
 
     @Indexed(unique = true)
-    private Long studentNumber;
+    private String studentNumber;
     private int graduateYear;
     private Address address;
     private Car haveCar;
@@ -40,7 +40,7 @@ public class User {
                 Gender gender, String emile,
                 String uniName,
                 int phoneNumber,
-                Long studentNumber,
+                String studentNumber,
                 int graduateYear,
                 Address address,
                 Car haveCar,
