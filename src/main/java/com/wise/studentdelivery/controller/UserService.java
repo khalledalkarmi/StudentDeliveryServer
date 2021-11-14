@@ -17,15 +17,15 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User>  getStudentByIdNumber(String  id){
+    public Optional<User> getUserByIdNumber(String  id){
         return userRepository.findUserByStudentNumber(id);
     }
 
-    public Optional<User> getStudentByEmail(String email){
+    public Optional<User> getUserByEmail(String email){
         return userRepository.findUserByEmile(email);
     }
 
-    public Optional<List<User>> getStudentsByUni(String uni){
+    public Optional<List<User>> getUsersByUni(String uni){
         return userRepository.findUsersByUniName(uni);
     }
 }

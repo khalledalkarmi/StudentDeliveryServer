@@ -31,26 +31,27 @@ public class UserController {
     @GetMapping
     public List<User> fetchAllStudent() {
         LOG.info("Getting all Users.");
+        List<User> test = userService.getAllUsers();
         return userService.getAllUsers();
     }
 
     @GetMapping("/id/{id}")
     public Optional<User> fetchByStudentNumber(@PathVariable String id) {
         LOG.info("Getting Student by id number: {}", id);
-        return userService.getStudentByIdNumber(id);
+        return userService.getUserByIdNumber(id);
     }
 
     @GetMapping("/email/{email}")
     public Optional<User> fetchByEmail(@PathVariable String email) {
         LOG.info("Getting Student by email: {} ", email);
         // return email;
-        return userService.getStudentByEmail(email);
+        return userService.getUserByEmail(email);
     }
 
     @GetMapping("/uni/{uni}")
     public Optional<List<User>> fetchStudentByUni(@PathVariable String uni) {
         LOG.info("Getting Student by uni name: {}", uni);
-        return userService.getStudentsByUni(uni);
+        return userService.getUsersByUni(uni);
     }
 
 
