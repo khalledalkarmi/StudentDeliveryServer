@@ -24,6 +24,7 @@ public class User {
     private String ID;
     private String firstName;
     private String lastName;
+    private String password;
     private Gender gender;
 
     @Indexed(unique = true)
@@ -48,7 +49,8 @@ public class User {
                 int graduateYear,
                 Address address,
                 Car haveCar,
-                LocalDateTime createdTime) {
+                LocalDateTime createdTime,
+                String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -60,5 +62,6 @@ public class User {
         this.address = address;
         this.haveCar = haveCar;
         this.createdTime = createdTime;
+        this.password=password;
     }
 }
