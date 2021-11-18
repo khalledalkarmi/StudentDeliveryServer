@@ -54,7 +54,7 @@ public class UserController {
     @PostMapping("/add")
     public void addUser(@RequestBody User user){
         userService.addUser(user);
-        LOG.info("user add {}",user);
+        LOG.info("user add {}",user.getFirstName());
     }
 
 
