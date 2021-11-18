@@ -28,4 +28,10 @@ public class UserService {
     public Optional<List<User>> getUsersByUni(String uni){
         return userRepository.findUsersByUniName(uni);
     }
+
+    public String addUser (User user){
+        userRepository.save(user);
+        return "user added";
+    }
+
 }
