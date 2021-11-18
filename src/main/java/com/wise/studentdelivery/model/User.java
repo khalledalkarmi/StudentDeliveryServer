@@ -2,6 +2,7 @@ package com.wise.studentdelivery.model;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,6 +16,7 @@ TODO: add student id number image
  */
 @Data
 @Getter
+@Setter
 @Document
 public class User {
     // we use @Indexed(unique = true) for unique number to avoid duplicated in database
