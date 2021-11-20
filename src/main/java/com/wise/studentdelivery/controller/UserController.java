@@ -39,10 +39,11 @@ public class UserController {
     }
 
     @GetMapping("/email/{email}")
-    public Optional<User> fetchByEmail(@PathVariable String email) {
+    public String fetchByEmail(@PathVariable String email) {
         LOG.info("Getting Student by email: {} ", email);
         // return email;
-        return userService.getUserByEmail(email);
+        var user = userService.getUserByEmail(email);
+        return user.map(User::getEmail).orElse(null);
     }
 
     @GetMapping("/uni/{uni}")

@@ -29,9 +29,10 @@ public class UserService {
         return userRepository.findUsersByUniName(uni);
     }
 
-    public String addUser (User user){
+    public void addUser (User user){
         userRepository.save(user);
-        return "user added";
     }
+
+
 
 }
