@@ -17,22 +17,25 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUserByIdNumber(String  id){
+    public Optional<User> getUserByIdNumber(String id) {
         return userRepository.findUserByStudentNumber(id);
     }
 
-    public Optional<User> getUserByEmail(String email){
+    public Optional<User> getUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
     }
 
-    public Optional<List<User>> getUsersByUni(String uni){
+    public Optional<List<User>> getUsersByUni(String uni) {
         return userRepository.findUsersByUniName(uni);
     }
 
-    public void addUser (User user){
-        userRepository.save(user);
+    public Optional<User> getUserByPhoneNumber(String phoneNumber){
+        return userRepository.findUserByPhoneNumber(phoneNumber);
     }
 
+    public void addUser(User user) {
+        userRepository.save(user);
+    }
 
 
 }

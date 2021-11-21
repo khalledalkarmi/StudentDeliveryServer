@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 /*
-    TODO: add fetchByStudentNumber
     TODO: add fetchByPhoneNumber
-    TODO: add fetchByEmail
     TODO: add fetchByCarNumber
 
  */
@@ -50,6 +48,11 @@ public class UserController {
     public Optional<List<User>> fetchStudentByUni(@PathVariable String uni) {
         LOG.info("Getting Student by uni name: {}", uni);
         return userService.getUsersByUni(uni);
+    }
+
+    @GetMapping("/phoneNumber/{phoneNumber}")
+    public Optional<User> fetchUserByPhoneNumber(@PathVariable String phoneNumber){
+        return userService.getUserByPhoneNumber(phoneNumber);
     }
 
     @PostMapping("/add")
