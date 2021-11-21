@@ -32,7 +32,7 @@ public class User {
     private String uniName;
 
     @Indexed(unique = true)
-    private int phoneNumber;
+    private String  phoneNumber;
 
     @Indexed(unique = true)
     private String studentNumber;
@@ -44,7 +44,7 @@ public class User {
     public User(String firstName, String lastName,
                 Gender gender, String email,
                 String uniName,
-                int phoneNumber,
+                String  phoneNumber,
                 String studentNumber,
                 int graduateYear,
                 Address address,
