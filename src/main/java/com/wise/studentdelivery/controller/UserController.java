@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 /*
     TODO: add fetchByPhoneNumber
@@ -22,7 +23,6 @@ public class UserController {
     private final UserService userService;
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
-
     @GetMapping
     public List<User> fetchAllStudent() {
         LOG.info("Getting all Users.");
@@ -44,6 +44,25 @@ public class UserController {
         var user = userService.getUserByEmail(email);
         return user.map(User::getEmail).orElse(null);
     }
+    //change password
+    @GetMapping("/upPass/{email}")
+    public Boolean updatePassword(@PathVariable String email){
+        LOG.info("update password Student by email: {} ", email);
+        var user = userService.getUserByEmail(email);
+        if (user.isPresent()){
+           Random random = new Random();
+            String emailBody= String.format("""
+                    Hi %s\s
+
+                    We received a request to reset the password for your account
+
+                    To reset your password copy this pin code %04d""",user.get().getFirstName(),random.nextInt(10000));
+
+            userService.sendMail(email,"Reset password",emailBody);
+            return true;
+        }
+        return false;
+    }
 
     @GetMapping("/uni/{uni}")
     public Optional<List<User>> fetchStudentByUni(@PathVariable String uni) {
@@ -61,7 +80,6 @@ public class UserController {
         userService.addUser(user);
         LOG.info("user add {}",user.getFirstName());
     }
-
 
 
 }
