@@ -40,6 +40,7 @@ public class UserController {
     public String fetchByEmail(@PathVariable String email) {
         LOG.info("Getting Student by email: {} ", email);
         // return email;
+        userService.sendMail("khalled.95@gmail.com","first email"," empty ");
         var user = userService.getUserByEmail(email);
         return user.map(User::getEmail).orElse(null);
     }
