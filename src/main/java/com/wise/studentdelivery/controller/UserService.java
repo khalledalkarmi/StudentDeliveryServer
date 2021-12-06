@@ -35,7 +35,7 @@ public class UserService {
         return userRepository.findUsersByUniName(uni);
     }
 
-    public Optional<User> getUserByPhoneNumber(String phoneNumber){
+    public Optional<User> getUserByPhoneNumber(String phoneNumber) {
         return userRepository.findUserByPhoneNumber(phoneNumber);
     }
 
@@ -43,8 +43,8 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void sendMail(String to, String subject, String body)
-    {
+    public void sendMail(String to, String subject, String body) {
+
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject(subject);

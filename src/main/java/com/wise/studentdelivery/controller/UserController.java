@@ -46,22 +46,23 @@ public class UserController {
     }
     //change password
     @GetMapping("/upPass/{email}")
-    public Boolean updatePassword(@PathVariable String email){
+    public int updatePassword(@PathVariable String email){
         LOG.info("update password Student by email: {} ", email);
         var user = userService.getUserByEmail(email);
         if (user.isPresent()){
            Random random = new Random();
+           int pin = random.nextInt(10000);
             String emailBody= String.format("""
                     Hi %s\s
 
                     We received a request to reset the password for your account
 
-                    To reset your password copy this pin code %04d""",user.get().getFirstName(),random.nextInt(10000));
+                    To reset your password copy this pin code %04d""",user.get().getFirstName(),pin);
 
             userService.sendMail(email,"Reset password",emailBody);
-            return true;
+            return pin;
         }
-        return false;
+        return -1;
     }
 
     @GetMapping("/uni/{uni}")
