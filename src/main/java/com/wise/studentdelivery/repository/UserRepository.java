@@ -14,9 +14,4 @@ public interface UserRepository extends MongoRepository <User,String >{
     Optional<User> findUserByStudentNumber(String studentNumber);
     Optional<List<User>> findUsersByUniName(String uniName);
 
-
-
-
-
-
 }

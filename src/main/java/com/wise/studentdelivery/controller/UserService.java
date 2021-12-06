@@ -3,6 +3,8 @@ package com.wise.studentdelivery.controller;
 import com.wise.studentdelivery.model.User;
 import com.wise.studentdelivery.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,6 +17,8 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+    private final Logger LOG = LoggerFactory.getLogger(getClass());
+
     private final UserRepository userRepository;
 
     private JavaMailSender mailSender;
@@ -23,16 +27,28 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUserByIdNumber(String id) {
-        return userRepository.findUserByStudentNumber(id);
-    }
-
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
     }
 
+    public Optional<User> getUserByIdNumber(String id) {
+        return userRepository.findUserByStudentNumber(id);
+    }
+
     public Optional<List<User>> getUsersByUni(String uni) {
         return userRepository.findUsersByUniName(uni);
+    }
+
+    public void updatePassword(String email, String newPassword) {
+        var user = getUserByEmail(email);
+        if (user.isPresent()) {
+            User updateUser = user.get();
+            updateUser.setPassword(newPassword);
+            userRepository.save(updateUser);
+            LOG.info("{}", updateUser.getFirstName());
+            LOG.info("user password updated {}", updateUser.getFirstName());
+        }
+
     }
 
     public Optional<User> getUserByPhoneNumber(String phoneNumber) {

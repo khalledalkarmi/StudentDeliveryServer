@@ -45,8 +45,8 @@ public class UserController {
         return user.map(User::getEmail).orElse(null);
     }
     //change password
-    @GetMapping("/upPass/{email}")
-    public int updatePassword(@PathVariable String email){
+    @GetMapping("/pin/{email}")
+    public int requestPIN(@PathVariable String email){
         LOG.info("update password Student by email: {} ", email);
         var user = userService.getUserByEmail(email);
         if (user.isPresent()){
@@ -82,5 +82,10 @@ public class UserController {
         LOG.info("user add {}",user.getFirstName());
     }
 
+    @PostMapping("/updatePassword/{email}/{newPassword}")
+    public void updatePassword(@PathVariable String email,@PathVariable String newPassword){
+        userService.updatePassword(email,newPassword);
+        LOG.info("password update for user {}", email);
+    }
 
 }
