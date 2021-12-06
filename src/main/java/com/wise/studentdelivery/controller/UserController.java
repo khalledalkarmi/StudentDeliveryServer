@@ -47,7 +47,6 @@ public class UserController {
     //change password
     @GetMapping("/pin/{email}")
     public int requestPIN(@PathVariable String email){
-        LOG.info("update password Student by email: {} ", email);
         var user = userService.getUserByEmail(email);
         if (user.isPresent()){
            Random random = new Random();
@@ -60,8 +59,10 @@ public class UserController {
                     To reset your password copy this pin code %04d""",user.get().getFirstName(),pin);
 
             userService.sendMail(email,"Reset password",emailBody);
+            LOG.info("Send PIN code to email: {} ", email);
             return pin;
         }
+        LOG.info("email not exist: {} ", email);
         return -1;
     }
 
