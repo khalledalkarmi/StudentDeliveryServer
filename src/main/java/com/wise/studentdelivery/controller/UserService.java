@@ -39,7 +39,7 @@ public class UserService {
         return userRepository.findUsersByUniName(uni);
     }
 
-    public void updatePassword(String email, String newPassword) {
+    public boolean updatePassword(String email, String newPassword) {
         var user = getUserByEmail(email);
         if (user.isPresent()) {
             User updateUser = user.get();
@@ -47,8 +47,9 @@ public class UserService {
             userRepository.save(updateUser);
             LOG.info("{}", updateUser.getFirstName());
             LOG.info("user password updated {}", updateUser.getFirstName());
+            return true;
         }
-
+        return false;
     }
 
     public Optional<User> getUserByPhoneNumber(String phoneNumber) {

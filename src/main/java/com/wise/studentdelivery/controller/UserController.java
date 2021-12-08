@@ -58,7 +58,7 @@ public class UserController {
 
                     To reset your password copy this pin code %04d""",user.get().getFirstName(),pin);
 
-            userService.sendMail(email,"Reset password",emailBody);
+            //userService.sendMail(email,"Reset password",emailBody);
             LOG.info("Send PIN code to email: {} ", email);
             return pin;
         }
@@ -84,9 +84,9 @@ public class UserController {
     }
 
     @PostMapping("/updatePassword/{email}/{newPassword}")
-    public void updatePassword(@PathVariable String email,@PathVariable String newPassword){
-        userService.updatePassword(email,newPassword);
+    public boolean updatePassword(@PathVariable String email,@PathVariable String newPassword){
         LOG.info("password update for user {}", email);
+        return userService.updatePassword(email,newPassword);
     }
 
 }
