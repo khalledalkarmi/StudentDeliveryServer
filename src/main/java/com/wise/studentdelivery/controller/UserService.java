@@ -60,6 +60,11 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public String getUserPasswordByEmail(String email){
+        var user = getUserByEmail(email);
+        return user.map(User::getPassword).orElse(null);
+    }
+
     public void sendMail(String to, String subject, String body) {
 
         SimpleMailMessage message = new SimpleMailMessage();

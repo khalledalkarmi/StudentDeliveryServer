@@ -89,4 +89,10 @@ public class UserController {
         return userService.updatePassword(email,newPassword);
     }
 
+    @GetMapping("/getPassword/{email}")
+    public String getUserPassword(@PathVariable String email){
+        LOG.info("get user password by email {}", email);
+        return userService.getUserPasswordByEmail(email);
+    }
+
 }
