@@ -3,9 +3,11 @@ package com.wise.studentdelivery.model;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -41,6 +43,7 @@ public class User {
     private Car haveCar;
     private LocalDateTime createdTime;
 
+    private Photo photo;
     public User(String firstName, String lastName,
                 Gender gender, String email,
                 String uniName,
@@ -50,7 +53,8 @@ public class User {
                 Address address,
                 Car haveCar,
                 LocalDateTime createdTime,
-                String password) {
+                String password
+                ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
