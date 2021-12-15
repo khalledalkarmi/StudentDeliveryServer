@@ -110,4 +110,9 @@ public class UserController {
         return user.map(value -> value.getPhoto().getImage()).orElse(null);
     }
 
+    @GetMapping("/{email}")
+    public Optional<User> getUserByEmail(@PathVariable String email){
+        LOG.info("image {}",userService.getUserByEmail(email).get().getPhoto());
+        return userService.getUserByEmail(email);
+    }
 }
