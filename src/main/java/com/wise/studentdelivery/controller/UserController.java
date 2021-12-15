@@ -2,6 +2,7 @@ package com.wise.studentdelivery.controller;
 
 import com.wise.studentdelivery.model.User;
 import lombok.AllArgsConstructor;
+import org.bson.types.Binary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -102,5 +103,11 @@ public class UserController {
         userService.addImage(email,image);
     }
 
+    @GetMapping("/getimage/{email}")
+    public Binary getImage(@PathVariable String email){
+        var user = userService.getUserByEmail(email);
+        user.ifPresent(value -> LOG.info("get image for user: {}", value.getFirstName()));
+        return user.map(value -> value.getPhoto().getImage()).orElse(null);
+    }
 
 }
