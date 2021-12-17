@@ -95,6 +95,13 @@ public class UserController {
         LOG.info("get Ride for user {}", email);
         return userService.getRideByEmail(email);
     }
+
+    @GetMapping("/getallride")
+    public List<Ride> getAllRideBy(){
+        LOG.info("get all Ride for users  ");
+        return userService.getAllRide();
+    }
+
     @PostMapping("/updatePassword/{email}/{newPassword}")
     public boolean updatePassword(@PathVariable String email,@PathVariable String newPassword){
         LOG.info("password update for user {}", email);

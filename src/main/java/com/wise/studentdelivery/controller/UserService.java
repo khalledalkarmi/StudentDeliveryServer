@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,7 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
 
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
@@ -66,22 +68,32 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public Ride getRideByEmail(String email){
+    public Ride getRideByEmail(String email) {
         var user = getUserByEmail(email);
-        if (user.isPresent()){
-            LOG.info("get Ride by email for user: {}",user.get().getEmail());
+        if (user.isPresent()) {
+            LOG.info("get Ride by email for user: {}", user.get().getEmail());
             return user.get().getRide();
         }
         return null;
     }
 
-    public void addRide(String email,Ride ride){
+    public List<Ride> getAllRide() {
+        var allUser = getAllUsers();
+        List<Ride> allRide = new ArrayList<>();
+        for (User u : allUser) {
+            if (u.getRide() != null)
+                allRide.add(u.getRide());
+        }
+        return allRide;
+    }
+
+    public void addRide(String email, Ride ride) {
         var user = getUserByEmail(email);
-        if (user.isPresent()){
+        if (user.isPresent()) {
             User updateUserRide = user.get();
             updateUserRide.setRide(ride);
             userRepository.save(updateUserRide);
-            LOG.info("ride added by email for user: {}",user.get().getEmail());
+            LOG.info("ride added by email for user: {}", user.get().getEmail());
         }
     }
 
@@ -91,7 +103,6 @@ public class UserService {
     }
 
     public void sendMail(String to, String subject, String body) {
-
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject(subject);
