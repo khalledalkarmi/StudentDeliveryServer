@@ -42,8 +42,6 @@ public class UserController {
     @GetMapping("/email/{email}")
     public String fetchByEmail(@PathVariable String email) {
         LOG.info("Getting Student by email: {} ", email);
-        // return email;
-        userService.sendMail("khalled.95@gmail.com","first email"," empty ");
         var user = userService.getUserByEmail(email);
         return user.map(User::getEmail).orElse(null);
     }
@@ -61,7 +59,7 @@ public class UserController {
 
                     To reset your password copy this pin code %04d""",user.get().getFirstName(),pin);
 
-            //userService.sendMail(email,"Reset password",emailBody);
+            userService.sendMail(email,"Reset password",emailBody);
             LOG.info("Send PIN code to email: {} ", email);
             return pin;
         }
@@ -92,7 +90,7 @@ public class UserController {
         return userService.updatePassword(email,newPassword);
     }
 
-    @GetMapping("/getPassword/{email}")
+    @GetMapping("/getpassword/{email}")
     public String getUserPassword(@PathVariable String email){
         LOG.info("get user password by email {}", email);
         return userService.getUserPasswordByEmail(email);

@@ -44,6 +44,7 @@ public class User {
     private LocalDateTime createdTime;
 
     private Photo photo;
+    private Ride ride;
     public User(String firstName, String lastName,
                 Gender gender, String email,
                 String uniName,
