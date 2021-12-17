@@ -1,5 +1,6 @@
 package com.wise.studentdelivery.repository;
 
+import com.wise.studentdelivery.model.Ride;
 import com.wise.studentdelivery.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

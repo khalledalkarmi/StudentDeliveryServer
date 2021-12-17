@@ -1,6 +1,7 @@
 package com.wise.studentdelivery.controller;
 
 import com.wise.studentdelivery.model.Photo;
+import com.wise.studentdelivery.model.Ride;
 import com.wise.studentdelivery.model.User;
 import com.wise.studentdelivery.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -63,6 +64,25 @@ public class UserService {
 
     public void addUser(User user) {
         userRepository.save(user);
+    }
+
+    public Ride getRideByEmail(String email){
+        var user = getUserByEmail(email);
+        if (user.isPresent()){
+            LOG.info("get Ride by email for user: {}",user.get().getEmail());
+            return user.get().getRide();
+        }
+        return null;
+    }
+
+    public void addRide(String email,Ride ride){
+        var user = getUserByEmail(email);
+        if (user.isPresent()){
+            User updateUserRide = user.get();
+            updateUserRide.setRide(ride);
+            userRepository.save(updateUserRide);
+            LOG.info("ride added by email for user: {}",user.get().getEmail());
+        }
     }
 
     public String getUserPasswordByEmail(String email) {

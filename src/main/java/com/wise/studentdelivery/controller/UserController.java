@@ -1,5 +1,6 @@
 package com.wise.studentdelivery.controller;
 
+import com.wise.studentdelivery.model.Ride;
 import com.wise.studentdelivery.model.User;
 import lombok.AllArgsConstructor;
 import org.bson.types.Binary;
@@ -84,6 +85,16 @@ public class UserController {
         LOG.info("user add {}",user.getFirstName());
     }
 
+    @PostMapping("/addride/{email}")
+    public void addRideByEmail(@RequestBody Ride ride, @PathVariable String email){
+        userService.addRide(email,ride);
+    }
+
+    @GetMapping("/getride/{email}")
+    public Ride getRideByEmail(@PathVariable String email){
+        LOG.info("get Ride for user {}", email);
+        return userService.getRideByEmail(email);
+    }
     @PostMapping("/updatePassword/{email}/{newPassword}")
     public boolean updatePassword(@PathVariable String email,@PathVariable String newPassword){
         LOG.info("password update for user {}", email);
