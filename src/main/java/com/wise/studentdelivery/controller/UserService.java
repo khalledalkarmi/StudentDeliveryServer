@@ -71,7 +71,7 @@ public class UserService {
     public Ride getRideByEmail(String email) {
         var user = getUserByEmail(email);
         if (user.isPresent()) {
-            LOG.info("get Ride by email for user: {}", user.get().getEmail());
+            LOG.info("get Ride by email for user: {} {}", user.get().getFirstName(),user.get().getLastName());
             return user.get().getRide();
         }
         return null;
@@ -87,10 +87,13 @@ public class UserService {
         return allRide;
     }
 
+
     public void addRide(String email, Ride ride) {
         var user = getUserByEmail(email);
         if (user.isPresent()) {
             User updateUserRide = user.get();
+            ride.setEmail(email);
+            ride.setFirstName(user.get().getFirstName());
             updateUserRide.setRide(ride);
             userRepository.save(updateUserRide);
             LOG.info("ride added by email for user: {}", user.get().getEmail());
