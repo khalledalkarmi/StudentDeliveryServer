@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-
+//TODO: move car object to this model
 @Data
 @Getter
 @Setter

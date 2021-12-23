@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 
 /*
-TODO: add profile image
+TODO: delete car object and move it to Ride model
 TODO: add id card image
 TODO: add student id number image
  */
