@@ -93,6 +93,7 @@ public class UserService {
         if (user.isPresent()) {
             User updateUserRide = user.get();
             ride.setEmail(email);
+            ride.setLastName(user.get().getLastName());
             ride.setFirstName(user.get().getFirstName());
             updateUserRide.setRide(ride);
             userRepository.save(updateUserRide);
