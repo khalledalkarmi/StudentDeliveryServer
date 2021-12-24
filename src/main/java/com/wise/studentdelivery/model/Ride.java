@@ -11,6 +11,7 @@ import lombok.Setter;
 public class Ride {
     private String email;
     private String firstName;
+    private String lastName;
     private String goTime;
     private String comeBackTime;
     private String uniName;
