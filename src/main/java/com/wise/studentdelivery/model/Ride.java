@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
 //TODO: move car object to this model
 @Data
 @Getter
@@ -20,12 +21,14 @@ public class Ride {
     private String emptySeats;
     private String price;
     private String extraDetails;
+    private String genderSpecific;
     private boolean isPrivate;
 
     public Ride(String goTime, String comeBackTime,
                 String uniName, String cityName,
                 String neighborhoodName, String emptySeats,
                 String price, String extraDetails,
+                String genderSpecific,
                 boolean isPrivate) {
         this.goTime = goTime;
         this.comeBackTime = comeBackTime;
@@ -35,6 +38,7 @@ public class Ride {
         this.emptySeats = emptySeats;
         this.price = price;
         this.extraDetails = extraDetails;
+        this.genderSpecific = genderSpecific;
         this.isPrivate = isPrivate;
     }
 
