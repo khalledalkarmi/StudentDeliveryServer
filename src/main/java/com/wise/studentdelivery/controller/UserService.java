@@ -71,7 +71,7 @@ public class UserService {
     public Ride getRideByEmail(String email) {
         var user = getUserByEmail(email);
         if (user.isPresent()) {
-            LOG.info("get Ride by email for user: {} {}", user.get().getFirstName(),user.get().getLastName());
+            LOG.info("get Ride by email for user: {} {}", user.get().getFirstName(), user.get().getLastName());
             return user.get().getRide();
         }
         return null;
@@ -87,6 +87,74 @@ public class UserService {
         return allRide;
     }
 
+    public List<Ride> getRideByUni(String uni) {
+        var allRide = getAllRide();
+        List<Ride> rideByUni = new ArrayList<>();
+        for (Ride r : allRide) {
+            if (r.getUniName().equals(uni)) {
+                rideByUni.add(r);
+            }
+        }
+        return rideByUni;
+    }
+
+    public List<Ride> getRideByCityName(String city) {
+        var allRide = getAllRide();
+        List<Ride> rideByCityName = new ArrayList<>();
+        for (Ride ride : allRide) {
+            if (ride.getCityName().equals(city)) {
+                rideByCityName.add(ride);
+            }
+        }
+        return rideByCityName;
+    }
+
+
+    public List<Ride> getRideByNeighborhoodName(String neighborhoodName) {
+        var allRide = getAllRide();
+        List<Ride> rideByNeighborhoodName = new ArrayList<>();
+        for (Ride ride : allRide) {
+            if (ride.getNeighborhoodName().equals(neighborhoodName)) {
+                rideByNeighborhoodName.add(ride);
+            }
+        }
+        return rideByNeighborhoodName;
+    }
+
+    public List<Ride> getRideByGreatPrice(String price) {
+        var allRide = getAllRide();
+        int intPrice = Integer.parseInt(price);
+        List<Ride> rideByGreatPrice = new ArrayList<>();
+        for (Ride ride : allRide) {
+            int priceToCompare = Integer.parseInt(ride.getPrice());
+            if (intPrice > priceToCompare)
+                rideByGreatPrice.add(ride);
+        }
+        return rideByGreatPrice;
+    }
+
+    public List<Ride> getRideByLowerPrice(String price) {
+        var allRide = getAllRide();
+        int intPrice = Integer.parseInt(price);
+        List<Ride> rideByLowerPrice = new ArrayList<>();
+        for (Ride ride : allRide) {
+            int priceToCompare = Integer.parseInt(ride.getPrice());
+            if (intPrice < priceToCompare)
+                rideByLowerPrice.add(ride);
+        }
+        return rideByLowerPrice;
+    }
+
+    public List<Ride> getRideByGenderSpecific(String gender) {
+        var allRide = getAllRide();
+        List<Ride> rideByGenderSpecific = new ArrayList<>();
+        for (Ride ride : allRide) {
+            if (ride.getGenderSpecific().equals(gender))
+                rideByGenderSpecific.add(ride);
+
+        }
+        return rideByGenderSpecific;
+    }
 
     public void addRide(String email, Ride ride) {
         var user = getUserByEmail(email);
