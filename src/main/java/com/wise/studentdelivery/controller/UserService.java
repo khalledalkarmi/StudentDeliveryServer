@@ -9,7 +9,6 @@ import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final Logger LOG = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private final UserRepository userRepository;
 
@@ -53,8 +52,8 @@ public class UserService {
             User updateUser = user.get();
             updateUser.setPassword(newPassword);
             userRepository.save(updateUser);
-            LOG.info("{}", updateUser.getFirstName());
-            LOG.info("user password updated {}", updateUser.getFirstName());
+            logger.info("{}", updateUser.getFirstName());
+            logger.info("user password updated {}", updateUser.getFirstName());
             return true;
         }
         return false;
@@ -71,7 +70,7 @@ public class UserService {
     public Ride getRideByEmail(String email) {
         var user = getUserByEmail(email);
         if (user.isPresent()) {
-            LOG.info("get Ride by email for user: {} {}", user.get().getFirstName(), user.get().getLastName());
+            logger.info("get Ride by email for user: {} {}", user.get().getFirstName(), user.get().getLastName());
             return user.get().getRide();
         }
         return null;
@@ -165,7 +164,7 @@ public class UserService {
             ride.setFirstName(user.get().getFirstName());
             updateUserRide.setRide(ride);
             userRepository.save(updateUserRide);
-            LOG.info("ride added by email for user: {}", user.get().getEmail());
+            logger.info("ride added by email for user: {}", user.get().getEmail());
         }
     }
 
@@ -188,7 +187,7 @@ public class UserService {
             Photo photo = new Photo(user.get().getID(), new Binary(BsonBinarySubType.BINARY, file.getBytes()));
             user.get().setPhoto(photo);
             userRepository.save(user.get());
-            LOG.info("Photo added for user{} ", user.get().getFirstName());
+            logger.info("Photo added for user{} ", user.get().getFirstName());
         }
     }
 

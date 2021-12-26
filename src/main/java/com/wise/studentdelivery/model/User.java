@@ -3,11 +3,9 @@ package com.wise.studentdelivery.model;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 

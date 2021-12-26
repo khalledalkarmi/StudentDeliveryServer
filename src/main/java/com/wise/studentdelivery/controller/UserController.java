@@ -25,12 +25,14 @@ import java.util.Random;
 public class UserController {
 
     private final UserService userService;
+    private Random random;
+
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
+
     @GetMapping
     public List<User> fetchAllStudent() {
         LOG.info("Getting all Users.");
-        List<User> test = userService.getAllUsers();
         return userService.getAllUsers();
     }
 
@@ -46,21 +48,22 @@ public class UserController {
         var user = userService.getUserByEmail(email);
         return user.map(User::getEmail).orElse(null);
     }
+
     //change password
     @GetMapping("/pin/{email}")
-    public int requestPIN(@PathVariable String email){
+    public int requestPIN(@PathVariable String email) {
         var user = userService.getUserByEmail(email);
-        if (user.isPresent()){
-           Random random = new Random();
-           int pin = random.nextInt(10000);
-            String emailBody= String.format("""
+        if (user.isPresent()) {
+            random = new Random();
+            int pin = random.nextInt(10000);
+            String emailBody = String.format("""
                     Hi %s\s
 
                     We received a request to reset the password for your account
 
-                    To reset your password copy this pin code %04d""",user.get().getFirstName(),pin);
+                    To reset your password copy this pin code %04d""", user.get().getFirstName(), pin);
 
-            userService.sendMail(email,"Reset password",emailBody);
+            userService.sendMail(email, "Reset password", emailBody);
             LOG.info("Send PIN code to email: {} ", email);
             return pin;
         }
@@ -75,60 +78,64 @@ public class UserController {
     }
 
     @GetMapping("/phoneNumber/{phoneNumber}")
-    public Optional<User> fetchUserByPhoneNumber(@PathVariable String phoneNumber){
+    public Optional<User> fetchUserByPhoneNumber(@PathVariable String phoneNumber) {
         return userService.getUserByPhoneNumber(phoneNumber);
     }
 
     @PostMapping("/add")
-    public void addUser(@RequestBody User user){
+    public void addUser(@RequestBody User user) {
         userService.addUser(user);
-        LOG.info("user add {}",user.getFirstName());
+        LOG.info("user add {}", user.getFirstName());
     }
 
     @PostMapping("/addride/{email}")
-    public void addRideByEmail(@RequestBody Ride ride, @PathVariable String email){
-        userService.addRide(email,ride);
+    public void addRideByEmail(@RequestBody Ride ride, @PathVariable String email) {
+        userService.addRide(email, ride);
     }
 
     @GetMapping("/getride/{email}")
-    public Ride getRideByEmail(@PathVariable String email){
+    public Ride getRideByEmail(@PathVariable String email) {
         LOG.info("get Ride for user {}", email);
         return userService.getRideByEmail(email);
     }
 
     @GetMapping("/getallride")
-    public List<Ride> getAllRideBy(){
+    public List<Ride> getAllRideBy() {
         LOG.info("get all Ride for users  ");
         return userService.getAllRide();
     }
 
     @PostMapping("/updatePassword/{email}/{newPassword}")
-    public boolean updatePassword(@PathVariable String email,@PathVariable String newPassword){
+    public boolean updatePassword(@PathVariable String email, @PathVariable String newPassword) {
         LOG.info("password update for user {}", email);
-        return userService.updatePassword(email,newPassword);
+        return userService.updatePassword(email, newPassword);
     }
 
     @GetMapping("/getpassword/{email}")
-    public String getUserPassword(@PathVariable String email){
+    public String getUserPassword(@PathVariable String email) {
         LOG.info("get user password by email {}", email);
         return userService.getUserPasswordByEmail(email);
     }
 
     @PostMapping("/addimage/{email}")
-    public void addImage(@RequestParam MultipartFile image,@PathVariable String email) throws IOException {
-        userService.addImage(email,image);
+    public void addImage(@RequestParam MultipartFile image, @PathVariable String email) throws IOException {
+        userService.addImage(email, image);
     }
 
     @GetMapping("/getimage/{email}")
-    public Binary getImage(@PathVariable String email){
+    public Binary getImage(@PathVariable String email) {
         var user = userService.getUserByEmail(email);
         user.ifPresent(value -> LOG.info("get image for user: {}", value.getFirstName()));
         return user.map(value -> value.getPhoto().getImage()).orElse(null);
     }
 
     @GetMapping("/{email}")
-    public Optional<User> getUserByEmail(@PathVariable String email){
-        LOG.info("image {}",userService.getUserByEmail(email).get().getPhoto());
-        return userService.getUserByEmail(email);
+    public Optional<User> getUserByEmail(@PathVariable String email) {
+        var user = userService.getUserByEmail(email);
+        if (user.isPresent()) {
+            LOG.info("get user by email user {}", user.get().getEmail());
+            return userService.getUserByEmail(email);
+        }
+        return Optional.empty();
     }
 }
