@@ -80,8 +80,10 @@ public class UserService {
         var allUser = getAllUsers();
         List<Ride> allRide = new ArrayList<>();
         for (User u : allUser) {
-            if (u.getRide() != null)
+            if (u.getRide() != null) {
                 allRide.add(u.getRide());
+                logger.info("get image for users {}",u.getPhoto());
+            }
         }
         return allRide;
     }
@@ -160,6 +162,8 @@ public class UserService {
         if (user.isPresent()) {
             User updateUserRide = user.get();
             ride.setEmail(email);
+            if (user.get().getPhoto() != null)
+                ride.setPhoto(user.get().getPhoto());
             ride.setLastName(user.get().getLastName());
             ride.setFirstName(user.get().getFirstName());
             updateUserRide.setRide(ride);

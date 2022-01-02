@@ -25,7 +25,6 @@ import java.util.Random;
 public class UserController {
 
     private final UserService userService;
-    private Random random;
 
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
@@ -54,7 +53,7 @@ public class UserController {
     public int requestPIN(@PathVariable String email) {
         var user = userService.getUserByEmail(email);
         if (user.isPresent()) {
-            random = new Random();
+            Random random = new Random();
             int pin = random.nextInt(10000);
             String emailBody = String.format("""
                     Hi %s\s
@@ -138,4 +137,36 @@ public class UserController {
         }
         return Optional.empty();
     }
+
+    @GetMapping("/getridebyuni/{uni}")
+    public List<Ride> getRideByUni(@PathVariable String uni) {
+        return userService.getRideByUni(uni);
+    }
+
+    @GetMapping("/getridebycityName/{city}")
+    public List<Ride> getRideByCityName(@PathVariable String city) {
+        return userService.getRideByCityName(city);
+    }
+
+    @GetMapping("/getridebyneighborhoodname/{neighborhoodName}")
+    public List<Ride> getRideByNeighborhoodName(@PathVariable String neighborhoodName) {
+        return userService.getRideByNeighborhoodName(neighborhoodName);
+    }
+
+    @GetMapping("/getridebygreatprice/{price}")
+    public List<Ride> getRideByGreatPrice(@PathVariable String price) {
+        return userService.getRideByGreatPrice(price);
+    }
+
+    @GetMapping("/getridebylowerprice/{price}")
+    public List<Ride> getRideByLowePrice(@PathVariable String price) {
+        return userService.getRideByLowerPrice(price);
+    }
+
+    @GetMapping("/getridebygenderspecific/{gender}")
+    private List<Ride> getRideByGenderSpecific(@PathVariable String gender) {
+        return userService.getRideByGenderSpecific(gender);
+    }
+
+
 }

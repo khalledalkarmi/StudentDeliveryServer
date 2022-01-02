@@ -12,6 +12,7 @@ public class Ride {
     private String email;
     private String firstName;
     private String lastName;
+    private Photo photo;
     private String goTime;
     private String comeBackTime;
     private String uniName;
@@ -21,14 +22,14 @@ public class Ride {
     private String price;
     private String extraDetails;
     private String genderSpecific;
-    private boolean isPrivate;
+    private String isPrivate;
 
     public Ride(String goTime, String comeBackTime,
                 String uniName, String cityName,
                 String neighborhoodName, String emptySeats,
                 String price, String extraDetails,
                 String genderSpecific,
-                boolean isPrivate) {
+                String isPrivate) {
         this.goTime = goTime;
         this.comeBackTime = comeBackTime;
         this.uniName = uniName;
