@@ -63,7 +63,7 @@ public class UserController {
                     To reset your password copy this pin code %04d""", user.get().getFirstName(), pin);
 
             userService.sendMail(email, "Reset password", emailBody);
-            LOG.info("Send PIN code to email: {} ", email);
+            LOG.info("Send PIN code to email: {} ", pin);
             return pin;
         }
         LOG.info("email not exist: {} ", email);
@@ -82,9 +82,19 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public void addUser(@RequestBody User user) {
+    public String addUser(@RequestBody User user) {
         userService.addUser(user);
         LOG.info("user add {}", user.getFirstName());
+        return "true";
+    }
+
+    @PostMapping("/updateuser")
+    public String updateUser(@RequestBody User user){
+        if (userService.updateUserInfo(user)) {
+            userService.updateUserInfo(user);
+            return "true";
+        }
+        return "false";
     }
 
     @PostMapping("/addride/{email}")

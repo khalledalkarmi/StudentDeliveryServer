@@ -58,6 +58,21 @@ public class UserService {
         }
         return false;
     }
+    public boolean updateUserInfo(User newUser){
+        var user = getUserByEmail(newUser.getEmail());
+        if (user.isPresent()){
+            User updated =user.get();
+            updated.setEmail(newUser.getEmail());
+            updated.setFirstName(newUser.getFirstName());
+            updated.setLastName(newUser.getLastName());
+            updated.setPhoneNumber(newUser.getPhoneNumber());
+            userRepository.save(updated);
+            logger.info("user updated {}", newUser.getFirstName());
+            return true;
+        }
+        logger.error("can't update {}", newUser.getFirstName());
+        return false;
+    }
 
     public Optional<User> getUserByPhoneNumber(String phoneNumber) {
         return userRepository.findUserByPhoneNumber(phoneNumber);
