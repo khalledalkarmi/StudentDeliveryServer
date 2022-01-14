@@ -201,6 +201,14 @@ public class UserService {
         mailSender.send(message);
     }
 
+    public void sendMailReport(String to,String subject,String body){
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(body);
+        mailSender.send(message);
+    }
+
     public void addImage(String email, MultipartFile file) throws IOException {
         var user = getUserByEmail(email);
         if (user.isPresent()) {
@@ -210,6 +218,8 @@ public class UserService {
             logger.info("Photo added for user{} ", user.get().getFirstName());
         }
     }
+
+
 
 
 }

@@ -26,6 +26,7 @@ public class UserController {
 
     private final UserService userService;
 
+    private final String ADMIN="khalled.95@gmail.com";
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
 
@@ -68,6 +69,12 @@ public class UserController {
         }
         LOG.info("email not exist: {} ", email);
         return -1;
+    }
+
+    @GetMapping("/report/{report}")
+    public String sendReport(@PathVariable String report){
+        userService.sendMailReport(ADMIN,"report problem",report);
+        return "true";
     }
 
     @GetMapping("/uni/{uni}")
