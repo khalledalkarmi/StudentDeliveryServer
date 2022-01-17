@@ -26,8 +26,6 @@ public class UserController {
 
     private final UserService userService;
 
-    private final String ADMIN="khalled.95@gmail.com";
-
     private final Logger LOG = LoggerFactory.getLogger(getClass());
 
     @GetMapping
@@ -73,6 +71,7 @@ public class UserController {
 
     @GetMapping("/report/{report}")
     public String sendReport(@PathVariable String report){
+        String ADMIN = "khalled.95@gmail.com";
         userService.sendMailReport(ADMIN,"report problem",report);
         return "true";
     }
@@ -105,8 +104,9 @@ public class UserController {
     }
 
     @PostMapping("/addride/{email}")
-    public void addRideByEmail(@RequestBody Ride ride, @PathVariable String email) {
+    public Boolean addRideByEmail(@RequestBody Ride ride, @PathVariable String email) {
         userService.addRide(email, ride);
+        return true;
     }
 
     @GetMapping("/getride/{email}")
