@@ -38,7 +38,6 @@ public class User {
     private String studentNumber;
     private int graduateYear;
     private Address address;
-    private Car haveCar;
     private LocalDateTime createdTime;
 
     private Photo photo;
@@ -63,7 +62,6 @@ public class User {
         this.studentNumber = studentNumber;
         this.graduateYear = graduateYear;
         this.address = address;
-        this.haveCar = haveCar;
         this.createdTime = createdTime;
         this.password=password;
     }
