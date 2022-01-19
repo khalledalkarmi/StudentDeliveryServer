@@ -22,6 +22,7 @@ public class Ride {
     private String price;
     private String extraDetails;
     private String genderSpecific;
+    private Car haveCar;
     private String isPrivate;
 
     public Ride(String goTime, String comeBackTime,
@@ -29,7 +30,8 @@ public class Ride {
                 String neighborhoodName, String emptySeats,
                 String price, String extraDetails,
                 String genderSpecific,
-                String isPrivate) {
+                String isPrivate,
+                Car haveCar) {
         this.goTime = goTime;
         this.comeBackTime = comeBackTime;
         this.uniName = uniName;
@@ -40,6 +42,7 @@ public class Ride {
         this.extraDetails = extraDetails;
         this.genderSpecific = genderSpecific;
         this.isPrivate = isPrivate;
+        this.haveCar=haveCar;
     }
 
 }
