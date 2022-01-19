@@ -49,7 +49,6 @@ public class User {
                 String studentNumber,
                 int graduateYear,
                 Address address,
-                Car haveCar,
                 LocalDateTime createdTime,
                 String password
                 ) {
