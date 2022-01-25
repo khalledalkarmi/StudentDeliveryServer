@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -182,6 +183,8 @@ public class UserService {
                 ride.setPhoto(user.get().getPhoto());
             ride.setLastName(user.get().getLastName());
             ride.setFirstName(user.get().getFirstName());
+            if (ride.getEmptySeats().equals("0"))
+                ride.setIsPrivate("true");
             updateUserRide.setRide(ride);
             userRepository.save(updateUserRide);
             logger.info("ride added by email for user: {}", user.get().getEmail());
