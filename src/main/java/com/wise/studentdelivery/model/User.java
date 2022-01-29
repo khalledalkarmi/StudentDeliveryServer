@@ -50,7 +50,8 @@ public class User {
                 int graduateYear,
                 Address address,
                 LocalDateTime createdTime,
-                String password
+                String password,
+                Ride ride
                 ) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -63,5 +64,6 @@ public class User {
         this.address = address;
         this.createdTime = createdTime;
         this.password=password;
+        this.ride=ride;
     }
 }

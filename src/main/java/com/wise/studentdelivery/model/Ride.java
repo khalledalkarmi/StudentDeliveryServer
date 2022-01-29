@@ -1,5 +1,6 @@
 package com.wise.studentdelivery.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,8 +42,8 @@ public class Ride {
         this.price = price;
         this.extraDetails = extraDetails;
         this.genderSpecific = genderSpecific;
-        this.isPrivate = isPrivate;
         this.haveCar=haveCar;
+        this.isPrivate = isPrivate;
     }
 
 }

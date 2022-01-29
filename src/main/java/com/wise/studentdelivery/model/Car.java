@@ -15,6 +15,5 @@ public class Car {
     private String carModel;
     private String carColor;
 
-    @Indexed(unique = true)
     private String carNumber;
 }
